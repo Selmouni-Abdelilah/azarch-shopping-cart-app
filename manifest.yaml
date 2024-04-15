@@ -20,6 +20,23 @@ spec:
             cpu: "500m"
         ports:
          - containerPort: 80
+        env:
+            - name: MenusDB
+              valueFrom:
+                secretKeyRef:
+                  name: menudb
+                  key: connection-string
+            - name: StorageConnectionString
+              valueFrom:
+                secretKeyRef:
+                  name: storageconnectionstring
+                  key: connection-string
+            - name: Redis
+              valueFrom:
+                secretKeyRef:
+                  name: redis
+                  key: connection-string
+                
 ---
 apiVersion: v1
 kind: Service

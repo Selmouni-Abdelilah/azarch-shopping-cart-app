@@ -120,7 +120,7 @@ namespace cart.Pages
 
         private IRedisClient GetRedisClient()
         {
-            var conString = _config.GetValue<String>("Redis:ConnectionString");
+            var conString = _config.GetValue<String>("Redis");
             var manager = new RedisManagerPool(conString);
             return manager.GetClient();
         }
