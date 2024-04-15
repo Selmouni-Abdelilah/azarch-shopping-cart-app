@@ -5,6 +5,7 @@
 
 trigger:
 - main
+- feature/*
 
 pool:
   vmImage: ubuntu-latest
@@ -17,3 +18,9 @@ steps:
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: 'latest'
+- task: KubernetesManifest@1
+  inputs:
+    action: 'deploy'
+    connectionType: 'kubernetesServiceConnection'
+    kubernetesServiceConnection: 'azarch-aks1-default'
+    manifests: 'manifest.yaml'
