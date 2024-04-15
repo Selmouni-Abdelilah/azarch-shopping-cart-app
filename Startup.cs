@@ -10,7 +10,7 @@ namespace cart
 {
     public class Startup
     {
-        private bool useInMemory = true;
+        private bool useInMemory = false;
 
         public Startup(IConfiguration configuration)
         {
@@ -29,7 +29,9 @@ namespace cart
             }
             else
             {
-                services.AddDbContext<MenuContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MenusDB")));
+                // services.AddDbContext<MenuContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MenusDB")));
+                var menusDbConnectionString = Configuration["MenusDB"];
+                services.AddDbContext<MenuContext>(options => options.UseSqlServer(menusDbConnectionString));
             }
         }
 
